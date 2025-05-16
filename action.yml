@@ -14,7 +14,15 @@ runs:
 
         mkdir aim
         cd aim
-        curl -L -o aim_ll.zip https://github.com/ArsenalRecon/Arsenal-Image-Mounter/raw/5961f922c5b99ec29acc4af4b60b909b402eed95/Command%20line%20applications/aim_ll.zip
+        curl \
+          --retry 5 \
+          --retry-delay 5 \
+          --retry-all-errors \
+          --fail \ # fail on HTTP errors
+          -L \ # Follow redirects
+          -C - \ # If a connection drops mid-transfer, resume where you left off
+          -o aim_ll.zip \
+          https://github.com/ArsenalRecon/Arsenal-Image-Mounter/raw/5961f922c5b99ec29acc4af4b60b909b402eed95/Command%20line%20applications/aim_ll.zip
         echo "a628fd0bb4b1657b2b89fd8972937b4d9c4b1292ea16764208fa63fc0ce84d54 aim_ll.zip" | sha256sum --check
         # unzip properly extracts everything but warns that "aim_ll.zip appears to use backslashes as path separators"
         # it then exits with a non-zero status code. the warning is harmless, so we ignore it.
@@ -22,7 +30,15 @@ runs:
         mkdir ~/bin
         mv x64/* ~/bin
 
-        curl -L -o DriverFiles.zip https://github.com/ArsenalRecon/Arsenal-Image-Mounter/raw/5961f922c5b99ec29acc4af4b60b909b402eed95/DriverSetup/DriverFiles.zip
+        curl \
+          --retry 5 \
+          --retry-delay 5 \
+          --retry-all-errors \
+          --fail \ # fail on HTTP errors
+          -L \ # Follow redirects
+          -C - \ # If a connection drops mid-transfer, resume where you left off
+          -o DriverFiles.zip \
+          https://github.com/ArsenalRecon/Arsenal-Image-Mounter/raw/5961f922c5b99ec29acc4af4b60b909b402eed95/DriverSetup/DriverFiles.zip
         echo "cc03472b689f23b1c66d1764b7a12e7212146b5c1f70e2613666efcd93b97192 DriverFiles.zip" | sha256sum --check
         # like above
         unzip DriverFiles.zip -d DriverFiles || true
