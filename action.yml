@@ -58,13 +58,3 @@ runs:
         aim_ll -a -s "20%" -m "$RUNNER_TEMP" -p "/fs:ntfs /q /y"
         cp -r "$RUNNER_TEMP"_tmp/. "$RUNNER_TEMP"
         rm -rf "$RUNNER_TEMP"_tmp
-
-        # RAM disk for the repository
-        rm -rf "$GITHUB_WORKSPACE"/*
-        # Use exfat instead of ntfs because ntfs creates an unremovable
-        # "System Volume Information" directory that makes actions/checkout fail.
-        # exfat is empty on creation
-        aim_ll -a -s "20%" -m "$GITHUB_WORKSPACE" -p "/fs:nfts /q /y"
-        # node's fs.promises.readdir used by actions/checkout fails if the
-        # directory is empty.
-        touch "$GITHUB_WORKSPACE"/dummy.txt
