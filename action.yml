@@ -55,6 +55,6 @@ runs:
         mkdir "$RUNNER_TEMP"_tmp
         cp -r "$RUNNER_TEMP"/. "$RUNNER_TEMP"_tmp
         rm -rf "$RUNNER_TEMP"/*
-        aim_ll -a -s "20%" -m "$RUNNER_TEMP" -p "/fs:ntfs /q /y"
+        aim_ll -a -s "40%" -m "$RUNNER_TEMP" -p "/fs:ntfs /q /y"
         cp -r "$RUNNER_TEMP"_tmp/. "$RUNNER_TEMP"
         rm -rf "$RUNNER_TEMP"_tmp
